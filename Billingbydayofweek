@@ -1,0 +1,20 @@
+SELECT
+    CASE 
+        WHEN DAYOFWEEK(t.date) = 1 THEN 'Sunday'
+        WHEN DAYOFWEEK(t.date) = 2 THEN 'Monday'
+        WHEN DAYOFWEEK(t.date) = 3 THEN 'Tuesday'
+        WHEN DAYOFWEEK(t.date) = 4 THEN 'Wednesday'
+        WHEN DAYOFWEEK(t.date) = 5 THEN 'Thursday'
+        WHEN DAYOFWEEK(t.date) = 6 THEN 'Friday'
+        WHEN DAYOFWEEK(t.date) = 7 THEN 'Saturday'
+    
+    END AS dia_da_semana,
+    SUM(tx.tax) AS total
+FROM
+    transactions t
+JOIN
+    tax tx ON t.Transaction_id = tx.Transaction_id
+GROUP BY
+    dia_da_semana
+ORDER BY 
+    DAYOFWEEK(t.date);
