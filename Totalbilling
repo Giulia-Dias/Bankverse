@@ -1,0 +1,6 @@
+SELECT 
+    SUM(tx.tax) as total_tax
+FROM 
+    transactions t
+JOIN 
+    tax tx ON t.Transaction_id = tx.Transaction_id;
