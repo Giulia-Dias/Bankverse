@@ -1,0 +1,26 @@
+WITH UserCounts AS (
+    SELECT
+        CASE 
+            WHEN android_user = 1 THEN 'Android'
+            WHEN ios_user = 1 THEN 'iOS'
+            ELSE 'Other'
+        END AS platform,
+        COUNT(*) AS user_count
+    FROM 
+        user
+    WHERE 
+        churn = 0
+    GROUP BY 
+        CASE 
+            WHEN android_user = 1 THEN 'Android'
+            WHEN ios_user = 1 THEN 'iOS'
+            ELSE 'Other'
+        END
+)
+
+SELECT 
+    platform,
+    user_count,
+    (SELECT SUM(user_count) FROM UserCounts) AS total_users
+FROM 
+    UserCounts;
