@@ -1,0 +1,11 @@
+SELECT 
+    LEFT (hour,2) as hour,
+    COUNT(DISTINCT section_id) AS usuarios_ativos,
+    SUM(used_premium_feature) AS premuim,
+    SUM(liked) AS avaliacoes_positivas
+FROM 
+    interaction
+GROUP BY 
+    hour
+ORDER BY 
+    hour;
